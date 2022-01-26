@@ -9,7 +9,7 @@ import csv
 import matplotlib.pyplot as plt
 
 
-# In[73]:
+# In[76]:
 
 
 # opening the 'my_csv' file to read its contents
@@ -53,24 +53,24 @@ def ShowGraphAnimation (Result_th, Result_thZero, Dataset, iteration):
 def Perceptron (iteration, Dataset):   
     dataset_features, dataset_labels = DataOrganize(Dataset)
     
-    initial_th = np.zeros(np.shape(dataset_features)[1])[np.newaxis].T
-    initial_thZero = 0
+    th = np.zeros(np.shape(dataset_features)[1])[np.newaxis].T
+    thZero = 0
     
     for t in range(iteration):
         changed = False
         for i in range(dataset_labels.shape[0]):
             if dataset_labels[i]*(np.dot(initial_th.T, dataset_features[i]) + initial_thZero) <= 0:
-                initial_th += (dataset_features[i]*dataset_labels[i])[np.newaxis].T
-                initial_thZero += dataset_labels[i]
+                th += (dataset_features[i]*dataset_labels[i])[np.newaxis].T
+                thZero += dataset_labels[i]
                 
-                ShowGraphAnimation(initial_th,initial_thZero,Dataset,(t+1)*(i+1))
+                ShowGraphAnimation(th, thZero, Dataset, (t+1)*(i+1))
                 
                 changed = True
         if changed == False:
             break
-    return initial_th, initial_thZero
+    return th, thZero
 
-result_th, result_thZero = Perceptron(3, dataset)
+result_th, result_thZero = Perceptron(8, dataset)
 
 
 # In[ ]:
